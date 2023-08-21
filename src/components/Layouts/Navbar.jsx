@@ -1,89 +1,47 @@
-import Image from 'next/image'
-import logo from '@/assets/img/logo.png'
-import Link from 'next/link'
-import { GiHamburgerMenu } from 'react-icons/gi'
-import { useState } from 'react'
-import { usePathname } from 'next/navigation'
-import { useSession, signOut } from 'next-auth/react'
+import Image from "next/image";
+import logo from "@/assets/img/logo.png";
+import Link from "next/link";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false)
-  const currentRoute = usePathname()
+  const [open, setOpen] = useState(false);
+  const currentRoute = usePathname();
 
-  const { data: session } = useSession()
-  console.log('session user', session)
+  const { data: session } = useSession();
+  console.log("session user", session);
 
   return (
-    <div className='w-full'>
-      {' '}
-      <div className='w-full'>
-        <div className='px-5 w-full py-4 flex justify-between'>
+    <div className="w-full">
+      {" "}
+      <div className="w-full">
+        <div className="px-5 w-full py-4 flex justify-between">
           <div>
-           <span className='text-2xl font-bold'>Pc-Builder</span>
+            <span className="text-2xl font-bold">Pc-Builder</span>
           </div>
-          <div className='flex items-center gap-5 justify-end'>
+          <div className="flex items-center gap-5 justify-end">
             <Link
               className={
-                currentRoute === '/'
-                  ? 'text-primary text-base font-semibold border-b-[2px] border-primary h-8'
-                  : 'text-dark text-base font-semibold h-8 hover:text-primary hover:border-primary hover:border-b-[2px] transition-all duration-100'
+                currentRoute === "/"
+                  ? "text-primary text-base font-semibold border-b-[2px] border-primary h-8"
+                  : "text-dark text-base font-semibold h-8 hover:text-primary hover:border-primary hover:border-b-[2px] transition-all duration-100"
               }
-              href={'/'}
+              href={"/"}
             >
               Home
             </Link>
-            <Link
-              className={
-                currentRoute === '/shops'
-                  ? 'text-primary text-base font-semibold border-b-[2px] border-primary h-8'
-                  : 'text-dark text-base font-semibold h-8 hover:text-primary hover:border-primary hover:border-b-[2px] transition-all duration-100'
-              }
-              href={'/shops'}
-            >
-              Shops
-            </Link>
-            <Link
-              className={
-                currentRoute === '/books'
-                  ? 'text-primary text-base font-semibold border-b-[2px] border-primary h-8'
-                  : 'text-dark text-base font-semibold h-8 hover:text-primary hover:border-primary hover:border-b-[2px] transition-all duration-100'
-              }
-              href={'/books'}
-            >
-              Books
-            </Link>
-            <Link
-              className={
-                currentRoute === '/blogs'
-                  ? 'text-primary text-base font-semibold border-b-[2px] border-primary h-8'
-                  : 'text-dark text-base font-semibold h-8 hover:text-primary hover:border-primary hover:border-b-[2px] transition-all duration-100'
-              }
-              href={'/blogs'}
-            >
-              Blogs
-            </Link>
             {!session?.user && (
               <Link
                 className={
-                  currentRoute === '/login'
-                    ? 'text-primary text-base font-semibold border-b-[2px] border-primary h-8'
-                    : 'text-dark text-base font-semibold h-8 hover:text-primary hover:border-primary hover:border-b-[2px] transition-all duration-100'
+                  currentRoute === "/login"
+                    ? "text-primary text-base font-semibold border-b-[2px] border-primary h-8"
+                    : "text-dark text-base font-semibold h-8 hover:text-primary hover:border-primary hover:border-b-[2px] transition-all duration-100"
                 }
-                href={'/login'}
+                href={"/login"}
               >
                 Login
-              </Link>
-            )}
-            {!session?.user && (
-              <Link
-                className={
-                  currentRoute === '/signup'
-                    ? 'text-primary text-base font-semibold border-b-[2px] border-primary h-8'
-                    : 'text-dark text-base font-semibold h-8 hover:text-primary hover:border-primary hover:border-b-[2px] transition-all duration-100'
-                }
-                href={'/signup'}
-              >
-                Sign Up
               </Link>
             )}
             {session?.user && (
@@ -192,7 +150,7 @@ const Navbar = () => {
         )}
       </div> */}
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
