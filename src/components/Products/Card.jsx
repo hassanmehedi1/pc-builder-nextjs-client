@@ -2,6 +2,7 @@ import React from "react";
 import { Card } from "antd";
 import Image from "next/image";
 const { Meta } = Card;
+import cardImg from "../../assets/img/pc.jpg";
 
 const ProductCard = () => {
   return (
@@ -14,7 +15,7 @@ const ProductCard = () => {
             height={100}
             layout="responsive"
             alt="example"
-            src="/pc.jpg"
+            src={cardImg}
           />
         }
       >
