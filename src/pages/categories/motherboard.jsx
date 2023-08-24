@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 const { Meta } = Card;
 
-const MotherBoard = ({ filterData }) => {
+const Monitor = ({ filterData }) => {
   return (
     <div className="w-full h-full">
       {filterData?.data?.length === 0 ? (
@@ -32,9 +32,15 @@ const MotherBoard = ({ filterData }) => {
                     />
                   }
                 >
+                  <p className="my-2 text-gray-500 font-bold">
+                    <span>{data?.status}</span>
+                  </p>
                   <Meta title={data?.name} />
                   <p className="my-2 text-gray-500 font-bold">
                     Price: $<span>{data?.price}</span>
+                  </p>
+                  <p className="my-2 text-gray-500 font-bold">
+                    Category: <span>{data?.category}</span>
                   </p>
                 </Card>
               </Link>
@@ -46,9 +52,9 @@ const MotherBoard = ({ filterData }) => {
   );
 };
 
-export default MotherBoard;
+export default Monitor;
 
-MotherBoard.getLayout = function getLayout(page) {
+Monitor.getLayout = function getLayout(page) {
   return (
     <RootLayout>
       <PcComponentLayout>{page}</PcComponentLayout>
@@ -58,7 +64,7 @@ MotherBoard.getLayout = function getLayout(page) {
 
 export const getStaticProps = async () => {
   const response = await fetch(
-    "https://pc-builder-server-dusky.vercel.app/api/v1/products?category=motherboard"
+    "https://pc-builder-server-dusky.vercel.app/api/v1/products?category=monitor"
   );
   const filterData = await response.json();
 
