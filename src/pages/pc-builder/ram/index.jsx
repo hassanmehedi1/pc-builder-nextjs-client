@@ -5,7 +5,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-const CategoryPowerSupplyInfo = ({ relatedProduct }) => {
+const CategoryRamInfo = ({ relatedProduct }) => {
   const { data: session } = useSession();
   const [copiedProductId, setCopiedProductId] = useState(null);
 
@@ -28,7 +28,7 @@ const CategoryPowerSupplyInfo = ({ relatedProduct }) => {
       if (response.ok) {
         // Product data copied successfully
         setCopiedProductId(productId);
-        // window.location.reload()
+        window.location.reload();
         toast.success("Successfully added product");
       } else {
         // Handle the error if necessary
@@ -43,7 +43,7 @@ const CategoryPowerSupplyInfo = ({ relatedProduct }) => {
     <div className="w-full px-5 flex justify-center items-center">
       <div className="w-full md:w-4/5 h-full bg-white md:p-8 p-3">
         <h2 className="text-center text-gray-500 font-medium text-2xl mb-2 font-mono">
-          Choose Your Favorite Power Supply Unit
+          Choose Your Favorite Ram
         </h2>
         {relatedProduct?.data?.map((product, index) => (
           <div
@@ -101,15 +101,15 @@ const CategoryPowerSupplyInfo = ({ relatedProduct }) => {
   );
 };
 
-export default CategoryPowerSupplyInfo;
+export default CategoryRamInfo;
 
-CategoryPowerSupplyInfo.getLayout = function getLayout(page) {
+CategoryRamInfo.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
 
 export const getServerSideProps = async () => {
   const response = await fetch(
-    "https://pc-builder-server-dusky.vercel.app/api/v1/products?category=Power Supply Unit"
+    "https://pc-builder-server-dusky.vercel.app/api/v1/products?category=ram"
   );
   const cpu = await response.json();
 

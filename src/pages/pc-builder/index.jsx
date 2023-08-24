@@ -1,268 +1,121 @@
 import RootLayout from "@/components/Layouts/RootLayout";
-import React, { useEffect, useState } from "react";
-import PcBuilderCategoryCard from "@/components/Products/PcBuilder";
-import Link from "next/link";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 
-const PcBuilder = ({ pcbuild }) => {
+const CategoryStorageInfo = ({ relatedProduct }) => {
   const { data: session } = useSession();
-  const filteredPCBuilds = pcbuild?.data?.filter(
-    (build) => build.userEmail === session?.user?.email
-  );
+  const [copiedProductId, setCopiedProductId] = useState(null);
 
+  const handleCopyProductToMypc = async (productId) => {
+    try {
+      const response = await fetch(
+        "https://pc-builder-server-dusky.vercel.app/api/v1/pcbuild",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            product: productId,
+            userEmail: session?.user?.email,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        // Product data copied successfully
+        setCopiedProductId(productId);
+        window.location.reload();
+        toast.success("Successfully added product");
+      } else {
+        // Handle the error if necessary
+        toast.error("Already added this product");
+        console.error("Failed to copy product data:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error while copying product data:", error.message);
+    }
+  };
   return (
-    <div className="w-full px-5 ">
-      <div className="flex justify-center items-center">
-        <div className="w-full md:w-4/5 h-full bg-white md:p-8 p-3">
-          <p className="text-xl font-bold text-[#3749BB] font-mono  text-center">
-            PC Master - Build & Configure Your Dream PC
-          </p>
-          <p className="my-3 bg-gray-500 px-3 text-white rounded">
-            core components
-          </p>
-
-          <PcBuilderCategoryCard url={"cpu"} title={"CPU / Processor"} />
-
-          {filteredPCBuilds?.map(
-            (data, index) =>
-              // Check if the product category is 'CPU / Processor'
-              data?.product?.category === "CPU / Processor" && (
-                <div key={index}>
-                  <div className="w-[95%] my-3 bg-[#F2F4F8] mx-auto flex flex-wrap gap-5 justify-between items-center">
-                    <div className="flex flex-wrap gap-4 items-center">
-                      <div className="rounded">
-                        <Image
-                          src="/pc.png"
-                          width={70}
-                          height={70}
-                          alt="pc/img"
-                        ></Image>
-                      </div>
-                      <div>
-                        <p>{data?.product?.name}</p>
-                        <p className="text-sm text-gray-500">
-                          {data?.product?.category}
-                        </p>
-                      </div>
-                    </div>
-                    <p className="pr-3 font-bold">${data?.product?.price}</p>
-                  </div>
-                </div>
-              )
-          )}
-
-          <PcBuilderCategoryCard url={"motherboard"} title={"Motherboard"} />
-
-          {filteredPCBuilds?.map(
-            (data, index) =>
-              // Check if the product category is 'CPU / Processor'
-              data?.product?.category === "Motherboard" && (
-                <div key={index}>
-                  <div className="w-[95%] my-3 bg-[#F2F4F8] mx-auto flex flex-wrap gap-5 justify-between items-center">
-                    <div className="flex flex-wrap gap-4 items-center">
-                      <div className="rounded">
-                        <Image
-                          src="/pc.png"
-                          width={70}
-                          height={70}
-                          alt="pc/img"
-                        ></Image>
-                      </div>
-                      <div>
-                        <p>{data?.product?.name}</p>
-                        <p className="text-sm text-gray-500">
-                          {data?.product?.category}
-                        </p>
-                      </div>
-                    </div>
-                    <p className="pr-3 font-bold">${data?.product?.price}</p>
-                  </div>
-                </div>
-              )
-          )}
-
-          <PcBuilderCategoryCard url={"ram"} title={"RAM"} />
-
-          {filteredPCBuilds?.map(
-            (data, index) =>
-              // Check if the product category is 'CPU / Processor'
-              data?.product?.category === "RAM" && (
-                <div key={index}>
-                  <div className="w-[95%] my-3 bg-[#F2F4F8] mx-auto flex flex-wrap gap-5 justify-between items-center">
-                    <div className="flex flex-wrap gap-4 items-center">
-                      <div className="rounded">
-                        <Image
-                          src="/pc.png"
-                          width={70}
-                          height={70}
-                          alt="pc/img"
-                        ></Image>
-                      </div>
-                      <div>
-                        <p>{data?.product?.name}</p>
-                        <p className="text-sm text-gray-500">
-                          {data?.product?.category}
-                        </p>
-                      </div>
-                    </div>
-                    <p className="pr-3 font-bold">${data?.product?.price}</p>
-                  </div>
-                </div>
-              )
-          )}
-
-          <PcBuilderCategoryCard
-            url={"powerSupplyUnit"}
-            title={"Power Supply Unit"}
-          />
-
-          {filteredPCBuilds?.map(
-            (data, index) =>
-              // Check if the product category is 'CPU / Processor'
-              data?.product?.category === "Power Supply Unit" && (
-                <div key={index}>
-                  <div className="w-[95%] my-3 bg-[#F2F4F8] mx-auto flex flex-wrap gap-5 justify-between items-center">
-                    <div className="flex flex-wrap gap-4 items-center">
-                      <div className="rounded">
-                        <Image
-                          src="/pc.png"
-                          width={70}
-                          height={70}
-                          alt="pc/img"
-                        ></Image>
-                      </div>
-                      <div>
-                        <p>{data?.product?.name}</p>
-                        <p className="text-sm text-gray-500">
-                          {data?.product?.category}
-                        </p>
-                      </div>
-                    </div>
-                    <p className="pr-3 font-bold">${data?.product?.price}</p>
-                  </div>
-                </div>
-              )
-          )}
-
-          <PcBuilderCategoryCard
-            url={"storageDevice"}
-            title={"Storage Device"}
-          />
-
-          {filteredPCBuilds?.map(
-            (data, index) =>
-              // Check if the product category is 'CPU / Processor'
-              data?.product?.category === "Storage Device" && (
-                <div key={index}>
-                  <div className="w-[95%] my-3 bg-[#F2F4F8] mx-auto flex flex-wrap gap-5 justify-between items-center">
-                    <div className="flex flex-wrap gap-4 items-center">
-                      <div className="rounded">
-                        <Image
-                          src="/pc.png"
-                          width={70}
-                          height={70}
-                          alt="pc/img"
-                        ></Image>
-                      </div>
-                      <div>
-                        <p>{data?.product?.name}</p>
-                        <p className="text-sm text-gray-500">
-                          {data?.product?.category}
-                        </p>
-                      </div>
-                    </div>
-                    <p className="pr-3 font-bold">${data?.product?.price}</p>
-                  </div>
-                </div>
-              )
-          )}
-
-          <PcBuilderCategoryCard url={"monitor"} title={"Monitor"} />
-
-          {filteredPCBuilds?.map(
-            (data, index) =>
-              // Check if the product category is 'CPU / Processor'
-              data?.product?.category === "Monitor" && (
-                <div key={index}>
-                  <div className="w-[95%] my-3 bg-[#F2F4F8] mx-auto flex flex-wrap gap-5 justify-between items-center">
-                    <div className="flex flex-wrap gap-4 items-center">
-                      <div className="rounded">
-                        <Image
-                          src="/pc.png"
-                          width={70}
-                          height={70}
-                          alt="pc/img"
-                        ></Image>
-                      </div>
-                      <div>
-                        <p>{data?.product?.name}</p>
-                        <p className="text-sm text-gray-500">
-                          {data?.product?.category}
-                        </p>
-                      </div>
-                    </div>
-                    <p className="pr-3 font-bold">${data?.product?.price}</p>
-                  </div>
-                </div>
-              )
-          )}
-
-          <PcBuilderCategoryCard url={"others"} title={"Others"} />
-
-          {filteredPCBuilds?.map(
-            (data, index) =>
-              // Check if the product category is 'CPU / Processor'
-              data?.product?.category === "Others" && (
-                <div key={index}>
-                  <div className="w-[95%] my-3 bg-[#F2F4F8] mx-auto flex flex-wrap gap-5 justify-between items-center">
-                    <div className="flex flex-wrap gap-4 items-center">
-                      <div className="rounded">
-                        <Image
-                          src="/pc.png"
-                          width={70}
-                          height={70}
-                          alt="pc/img"
-                        ></Image>
-                      </div>
-                      <div>
-                        <p>{data?.product?.name}</p>
-                        <p className="text-sm text-gray-500">
-                          {data?.product?.category}
-                        </p>
-                      </div>
-                    </div>
-                    <p className="pr-3 font-bold">${data?.product?.price}</p>
-                  </div>
-                </div>
-              )
-          )}
-        </div>
-      </div>
-      <div className="w-full md:w-4/5 h-full bg-white mx-auto flex justify-end pb-3 pr-8">
-        <button className="px-8 py-3 rounded border hover:border-orange-500 border-gray-500 text-black hover:bg-orange-500 hover:text-white font-medium">
-          Build PC
-        </button>
+    <div className="w-full px-5 flex justify-center items-center">
+      <div className="w-full md:w-4/5 h-full bg-white md:p-8 p-3">
+        <h2 className="text-center text-gray-500 font-medium text-2xl mb-2 font-mono">
+          Choose Your Favorite Storage
+        </h2>
+        {relatedProduct?.data?.map((product, index) => (
+          <div
+            key={index}
+            className="flex bg-[#f2f4f8] gap-3 justify-between items-center mb-3"
+          >
+            <div className="flex w-full h-full p-5 rounded">
+              <div>
+                <Image
+                  src="/ryzen.png"
+                  width={400}
+                  height={400}
+                  layout="responsive"
+                  alt="category/img"
+                ></Image>
+              </div>
+              <div>
+                <h4 className="font-medium mb-2">{product?.name}</h4>
+                <ul className="list-disc pl-5">
+                  <li className="text-sm">Base Clock Speed 3.2GHz</li>
+                  <li className="text-sm">Package AM4</li>
+                  <li className="text-sm">PCI Express PCIe 3.0</li>
+                  <li className="text-sm">
+                    Speed 4.10 GHz, Cores- 2 & Threads- 4
+                  </li>
+                  <li className="text-sm">4M Intel Smart Cache</li>
+                </ul>
+              </div>
+            </div>
+            <div className="mr-3">
+              <h3 className="font-medium text-xl">
+                7,000 <span className="text-3xl font-bold">৳</span>
+              </h3>
+              <button
+                onClick={() => handleCopyProductToMypc(product?._id)}
+                type="button"
+                className="btn btn--purple mt-2"
+                disabled={copiedProductId === product?._id}
+              >
+                <span class="btn__txt">
+                  <Link className="text-white" href="/pc-builder">
+                    {copiedProductId === product?._id ? "Added" : "Add"}
+                  </Link>
+                </span>
+                <i class="btn__bg" aria-hidden="true"></i>
+                <i class="btn__bg" aria-hidden="true"></i>
+                <i class="btn__bg" aria-hidden="true"></i>
+                <i class="btn__bg" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
 };
 
-export default PcBuilder;
+export default CategoryStorageInfo;
 
-PcBuilder.getLayout = function getLayout(page) {
+CategoryStorageInfo.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
 
 export const getServerSideProps = async () => {
-  const res = await fetch(
-    `https://pc-builder-server-dusky.vercel.app/api/v1/pcBuild`
+  const response = await fetch(
+    "https://pc-builder-server-dusky.vercel.app/api/v1/products?category=Storage Device"
   );
-  const data = await res.json();
+  const cpu = await response.json();
 
   return {
     props: {
-      pcbuild: data,
+      relatedProduct: cpu,
     },
   };
 };
