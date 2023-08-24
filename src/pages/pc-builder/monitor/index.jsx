@@ -12,7 +12,7 @@ const CategoryMonitorInfo = ({ relatedProduct }) => {
   const handleCopyProductToMypc = async (productId) => {
     try {
       const response = await fetch(
-        "https://pc-builder-server-dusky.vercel.app/api/v1/pcbuild",
+        "https://pc-builder-server-kappa.vercel.app/api/v1/pcbuild",
         {
           method: "POST",
           headers: {
@@ -52,9 +52,9 @@ const CategoryMonitorInfo = ({ relatedProduct }) => {
             className="flex bg-[#f2f4f8] gap-3 justify-between items-center mb-3"
           >
             <div className="flex w-full h-full p-5 rounded">
-              <div>
+              <div className="w-[20%]">
                 <Image
-                  src="/ryzen.png"
+                  src="/pcc.png"
                   width={400}
                   height={400}
                   layout="responsive"
@@ -110,7 +110,7 @@ CategoryMonitorInfo.getLayout = function getLayout(page) {
 
 export const getServerSideProps = async () => {
   const response = await fetch(
-    "https://pc-builder-server-dusky.vercel.app/api/v1/products?category=monitor"
+    "https://pc-builder-server-kappa.vercel.app/api/v1/products?category=monitor"
   );
   const cpu = await response.json();
 

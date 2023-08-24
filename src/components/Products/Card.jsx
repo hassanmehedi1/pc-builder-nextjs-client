@@ -45,7 +45,7 @@ const ProductCard = ({ product }) => {
               height={100}
               layout="responsive"
               alt="example"
-              src="/pc.jpg"
+              src="/pc2.jpg"
             />
           }
         >

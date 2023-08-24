@@ -1,76 +1,121 @@
-import PcComponentLayout from "@/components/Layouts/PcComponentLayout/PcComponentsLayout";
 import RootLayout from "@/components/Layouts/RootLayout";
-import React from "react";
-import { Card } from "antd";
-import Link from "next/link";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
-const { Meta } = Card;
+import Link from "next/link";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 
-const PowerSupplyUnit = ({ filterData }) => {
+const CategoryPowerSupplyInfo = ({ relatedProduct }) => {
+  const { data: session } = useSession();
+  const [copiedProductId, setCopiedProductId] = useState(null);
+
+  const handleCopyProductToMypc = async (productId) => {
+    try {
+      const response = await fetch(
+        "https://pc-builder-server-dusky.vercel.app/api/v1/pcbuild",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            product: productId,
+            userEmail: session?.user?.email,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        // Product data copied successfully
+        setCopiedProductId(productId);
+        window.location.reload();
+        toast.success("Successfully added product");
+      } else {
+        // Handle the error if necessary
+        toast.error("Already added this product");
+        console.error("Failed to copy product data:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error while copying product data:", error.message);
+    }
+  };
   return (
-    <div className="w-full h-full">
-      {filterData?.data?.length === 0 ? (
-        <div className="w-full h-full text-xl font-bold flex justify-center items-center">
-          No Data Matched
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-          {filterData?.data?.map((data, index) => (
-            <div key={index}>
-              <Link href={`/${data?._id}`}>
-                <Card
-                  className="bg-[#f2f4f8]"
-                  hoverable
-                  cover={
-                    <Image
-                      className="p-4"
-                      width={100}
-                      height={100}
-                      layout="responsive"
-                      alt="example"
-                      src="/pc.jpg"
-                    />
-                  }
-                >
-                  <p className="my-2 text-gray-500 font-bold">
-                    <span>{data?.status}</span>
-                  </p>
-                  <Meta title={data?.name} />
-                  <p className="my-2 text-gray-500 font-bold">
-                    Price: $<span>{data?.price}</span>
-                  </p>
-                  <p className="my-2 text-gray-500 font-bold">
-                    Category: <span>{data?.category}</span>
-                  </p>
-                </Card>
-              </Link>
+    <div className="w-full px-5 flex justify-center items-center">
+      <div className="w-full md:w-4/5 h-full bg-white md:p-8 p-3">
+        <h2 className="text-center text-gray-500 font-medium text-2xl mb-2 font-mono">
+          Choose Your Favorite Power Supply Unit
+        </h2>
+        {relatedProduct?.data?.map((product, index) => (
+          <div
+            key={index}
+            className="flex bg-[#f2f4f8] gap-3 justify-between items-center mb-3"
+          >
+            <div className="flex w-full h-full p-5 rounded">
+              <div>
+                <Image
+                  src="/ryzen.png"
+                  width={400}
+                  height={400}
+                  layout="responsive"
+                  alt="category/img"
+                ></Image>
+              </div>
+              <div>
+                <h4 className="font-medium mb-2">{product?.name}</h4>
+                <ul className="list-disc pl-5">
+                  <li className="text-sm">Base Clock Speed 3.2GHz</li>
+                  <li className="text-sm">Package AM4</li>
+                  <li className="text-sm">PCI Express PCIe 3.0</li>
+                  <li className="text-sm">
+                    Speed 4.10 GHz, Cores- 2 & Threads- 4
+                  </li>
+                  <li className="text-sm">4M Intel Smart Cache</li>
+                </ul>
+              </div>
             </div>
-          ))}
-        </div>
-      )}
+            <div className="mr-3">
+              <h3 className="font-medium text-xl">
+                7,000 <span className="text-3xl font-bold">৳</span>
+              </h3>
+              <button
+                onClick={() => handleCopyProductToMypc(product?._id)}
+                type="button"
+                className="btn btn--purple mt-2"
+                disabled={copiedProductId === product?._id}
+              >
+                <span class="btn__txt">
+                  <Link className="text-white" href="/pc-builder">
+                    {copiedProductId === product?._id ? "Added" : "Add"}
+                  </Link>
+                </span>
+                <i class="btn__bg" aria-hidden="true"></i>
+                <i class="btn__bg" aria-hidden="true"></i>
+                <i class="btn__bg" aria-hidden="true"></i>
+                <i class="btn__bg" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default PowerSupplyUnit;
+export default CategoryPowerSupplyInfo;
 
-PowerSupplyUnit.getLayout = function getLayout(page) {
-  return (
-    <RootLayout>
-      <PcComponentLayout>{page}</PcComponentLayout>
-    </RootLayout>
-  );
+CategoryPowerSupplyInfo.getLayout = function getLayout(page) {
+  return <RootLayout>{page}</RootLayout>;
 };
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const response = await fetch(
-    "https://pc-builder-server-dusky.vercel.app/api/v1/products?category=powerSupplyUnit"
+    "https://pc-builder-server-dusky.vercel.app/api/v1/products?category=Power Supply Unit"
   );
-  const filterData = await response.json();
+  const cpu = await response.json();
 
   return {
     props: {
-      filterData: filterData,
+      relatedProduct: cpu,
     },
   };
 };

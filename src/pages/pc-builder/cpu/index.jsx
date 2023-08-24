@@ -12,7 +12,7 @@ const CategoryCpuInfo = ({ relatedProduct }) => {
   const handleCopyProductToMypc = async (productId) => {
     try {
       const response = await fetch(
-        "https://pc-builder-server-dusky.vercel.app/api/v1/pcbuild",
+        "https://pc-builder-server-kappa.vercel.app/api/v1/pcbuild",
         {
           method: "POST",
           headers: {
@@ -109,7 +109,7 @@ CategoryCpuInfo.getLayout = function getLayout(page) {
 
 export const getServerSideProps = async () => {
   const response = await fetch(
-    "https://pc-builder-server-dusky.vercel.app/api/v1/products?category=cpu"
+    "https://pc-builder-server-kappa.vercel.app/api/v1/products?category=cpu"
   );
   const cpu = await response.json();
 

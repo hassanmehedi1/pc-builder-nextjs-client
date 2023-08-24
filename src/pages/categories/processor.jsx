@@ -64,7 +64,7 @@ Processor.getLayout = function getLayout(page) {
 
 export const getStaticProps = async () => {
   const response = await fetch(
-    "https://pc-builder-server-dusky.vercel.app/api/v1/products?category=processor"
+    "https://pc-builder-server-kappa.vercel.app/api/v1/products?category=processor"
   );
   const filterData = await response.json();
 

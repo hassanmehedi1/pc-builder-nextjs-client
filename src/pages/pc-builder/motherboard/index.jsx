@@ -12,7 +12,7 @@ const CategoryMotherboardInfo = ({ relatedProduct }) => {
   const handleCopyProductToMypc = async (productId) => {
     try {
       const response = await fetch(
-        "https://pc-builder-server-dusky.vercel.app/api/v1/pcbuild",
+        "https://pc-builder-server-kappa.vercel.app/api/v1/pcbuild",
         {
           method: "POST",
           headers: {
@@ -52,11 +52,11 @@ const CategoryMotherboardInfo = ({ relatedProduct }) => {
             className="flex bg-[#f2f4f8] gap-3 justify-between items-center mb-3"
           >
             <div className="flex w-full h-full p-5 rounded">
-              <div>
+              <div className="w-[20%]">
                 <Image
-                  src="/ryzen.png"
-                  width={400}
-                  height={400}
+                  src="/mother.png"
+                  width={50}
+                  height={50}
                   layout="responsive"
                   alt="category/img"
                 ></Image>
@@ -110,7 +110,7 @@ CategoryMotherboardInfo.getLayout = function getLayout(page) {
 
 export const getServerSideProps = async () => {
   const response = await fetch(
-    "https://pc-builder-server-dusky.vercel.app/api/v1/products?category=motherboard"
+    "https://pc-builder-server-kappa.vercel.app/api/v1/products?category=motherboard"
   );
   const cpu = await response.json();
 

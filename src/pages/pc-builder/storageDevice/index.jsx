@@ -5,14 +5,14 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-const CategoryPowerSupplyInfo = ({ relatedProduct }) => {
+const CategoryStorageInfo = ({ relatedProduct }) => {
   const { data: session } = useSession();
   const [copiedProductId, setCopiedProductId] = useState(null);
 
   const handleCopyProductToMypc = async (productId) => {
     try {
       const response = await fetch(
-        "https://pc-builder-server-dusky.vercel.app/api/v1/pcbuild",
+        "https://pc-builder-server-kappa.vercel.app/api/v1/pcbuild",
         {
           method: "POST",
           headers: {
@@ -28,7 +28,7 @@ const CategoryPowerSupplyInfo = ({ relatedProduct }) => {
       if (response.ok) {
         // Product data copied successfully
         setCopiedProductId(productId);
-        // window.location.reload()
+        window.location.reload();
         toast.success("Successfully added product");
       } else {
         // Handle the error if necessary
@@ -43,7 +43,7 @@ const CategoryPowerSupplyInfo = ({ relatedProduct }) => {
     <div className="w-full px-5 flex justify-center items-center">
       <div className="w-full md:w-4/5 h-full bg-white md:p-8 p-3">
         <h2 className="text-center text-gray-500 font-medium text-2xl mb-2 font-mono">
-          Choose Your Favorite Power Supply Unit
+          Choose Your Favorite Storage
         </h2>
         {relatedProduct?.data?.map((product, index) => (
           <div
@@ -51,9 +51,9 @@ const CategoryPowerSupplyInfo = ({ relatedProduct }) => {
             className="flex bg-[#f2f4f8] gap-3 justify-between items-center mb-3"
           >
             <div className="flex w-full h-full p-5 rounded">
-              <div>
+              <div className="w-[20%]">
                 <Image
-                  src="/ryzen.png"
+                  src="/hdd.png"
                   width={400}
                   height={400}
                   layout="responsive"
@@ -101,15 +101,15 @@ const CategoryPowerSupplyInfo = ({ relatedProduct }) => {
   );
 };
 
-export default CategoryPowerSupplyInfo;
+export default CategoryStorageInfo;
 
-CategoryPowerSupplyInfo.getLayout = function getLayout(page) {
+CategoryStorageInfo.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
 
 export const getServerSideProps = async () => {
   const response = await fetch(
-    "https://pc-builder-server-dusky.vercel.app/api/v1/products?category=Power Supply Unit"
+    "https://pc-builder-server-kappa.vercel.app/api/v1/products?category=Storage Device"
   );
   const cpu = await response.json();
 
