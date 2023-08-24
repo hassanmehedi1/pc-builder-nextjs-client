@@ -15,7 +15,7 @@ export const authOptions = {
   ],
   // for privet route
   pages: {
-    signIn: "/login",
+    signIn: "https://pc-builder-next-js-kappa.vercel.app/login",
   },
 };
 
