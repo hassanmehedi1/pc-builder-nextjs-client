@@ -35,11 +35,11 @@ const Navbar = () => {
             </Link>
             <Link
               className={
-                currentRoute === "/Pc-components"
+                currentRoute === "/categories/processor"
                   ? "active custom_link"
                   : "custom_link"
               }
-              href={"/Pc-components"}
+              href={"/categories/processor"}
             >
               Categories
             </Link>
