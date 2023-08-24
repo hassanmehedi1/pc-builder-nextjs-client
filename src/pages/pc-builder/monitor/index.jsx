@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const CategoryInfo = () => {
+const CategoryMonitorInfo = () => {
   return (
     <div className="w-full px-5 flex justify-center items-center">
       <div className="w-full md:w-4/5 h-full bg-white md:p-8 p-3">
@@ -149,8 +149,8 @@ const CategoryInfo = () => {
   );
 };
 
-export default CategoryInfo;
+export default CategoryMonitorInfo;
 
-CategoryInfo.getLayout = function getLayout(page) {
+CategoryMonitorInfo.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
