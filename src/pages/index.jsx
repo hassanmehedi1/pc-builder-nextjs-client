@@ -24,7 +24,7 @@ export const getStaticProps = async () => {
     "https://pc-builder-server-kappa.vercel.app/api/v1/products"
   );
   const data = await res.json();
-  console.log(data);
+  // console.log(data)
 
   return {
     props: {
