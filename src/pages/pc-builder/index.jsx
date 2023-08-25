@@ -21,8 +21,8 @@ const PcBuilder = ({ pcbuild }) => {
           <p className="text-xl font-bold text-[#3749BB] font-mono  text-center">
             PC Master - Build & Configure Your Dream PC
           </p>
-          <p className="my-3 bg-gray-500 px-3 text-white rounded text-center">
-            Core Components
+          <p className="my-3 bg-gray-500 px-3 text-white rounded">
+            core components
           </p>
 
           <PcBuilderCategoryCard
@@ -40,7 +40,7 @@ const PcBuilder = ({ pcbuild }) => {
                     <div className="flex flex-wrap gap-4 items-center">
                       <div className="rounded">
                         <Image
-                          src="/cpu2.jpg"
+                          src="/pc.png"
                           width={70}
                           height={70}
                           alt="pc/img"
@@ -74,7 +74,7 @@ const PcBuilder = ({ pcbuild }) => {
                     <div className="flex flex-wrap gap-4 items-center">
                       <div className="rounded">
                         <Image
-                          src="/mother.png"
+                          src="/pc.png"
                           width={70}
                           height={70}
                           alt="pc/img"
@@ -108,7 +108,7 @@ const PcBuilder = ({ pcbuild }) => {
                     <div className="flex flex-wrap gap-4 items-center">
                       <div className="rounded">
                         <Image
-                          src="/ram.png"
+                          src="/pc.png"
                           width={70}
                           height={70}
                           alt="pc/img"
@@ -142,7 +142,7 @@ const PcBuilder = ({ pcbuild }) => {
                     <div className="flex flex-wrap gap-4 items-center">
                       <div className="rounded">
                         <Image
-                          src="/power.png"
+                          src="/pc.png"
                           width={70}
                           height={70}
                           alt="pc/img"
@@ -176,7 +176,7 @@ const PcBuilder = ({ pcbuild }) => {
                     <div className="flex flex-wrap gap-4 items-center">
                       <div className="rounded">
                         <Image
-                          src="/hdd.png"
+                          src="/pc.png"
                           width={70}
                           height={70}
                           alt="pc/img"
@@ -210,7 +210,7 @@ const PcBuilder = ({ pcbuild }) => {
                     <div className="flex flex-wrap gap-4 items-center">
                       <div className="rounded">
                         <Image
-                          src="/pcc.png"
+                          src="/pc.png"
                           width={70}
                           height={70}
                           alt="pc/img"
@@ -244,7 +244,7 @@ const PcBuilder = ({ pcbuild }) => {
                     <div className="flex flex-wrap gap-4 items-center">
                       <div className="rounded">
                         <Image
-                          src="/sam.jpg"
+                          src="/pc.png"
                           width={70}
                           height={70}
                           alt="pc/img"
