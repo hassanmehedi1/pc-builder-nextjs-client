@@ -11,8 +11,8 @@ body {
 .custom_link {
   background-image: linear-gradient(
     to right,
-    #f1592b,
-    #f1592b 50%,
+    #007fff,
+    #007fff 50%,
     #064532 50%
   );
   background-size: 200% 100%;
@@ -27,7 +27,7 @@ body {
 
 .custom_link:before {
   content: "";
-  background: #f1592b;
+  background: #007fff;
   display: block;
   position: absolute;
   bottom: -3px;
