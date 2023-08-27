@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const CategoryMotherboardInfo = ({ relatedProduct }) => {
   const { data: session } = useSession();
@@ -28,7 +29,7 @@ const CategoryMotherboardInfo = ({ relatedProduct }) => {
       if (response.ok) {
         // Product data copied successfully
         setCopiedProductId(productId);
-        window.location.reload();
+        window.history.back();
         toast.success("Successfully added product");
       } else {
         // Handle the error if necessary
@@ -61,17 +62,20 @@ const CategoryMotherboardInfo = ({ relatedProduct }) => {
                   alt="category/img"
                 ></Image>
               </div>
-              <div>
+              <div className="ml-3">
                 <h4 className="font-medium mb-2">{product?.name}</h4>
+                <h4 className="font-medium mb-2">
+                  Category: {product?.category}
+                </h4>
+                <h4 className="font-medium mb-2">Status: {product?.status}</h4>
                 <ul className="list-disc pl-5">
                   <li className="text-sm">Base Clock Speed 3.2GHz</li>
                   <li className="text-sm">Package AM4</li>
                   <li className="text-sm">PCI Express PCIe 3.0</li>
-                  <li className="text-sm">
-                    Speed 4.10 GHz, Cores- 2 & Threads- 4
-                  </li>
-                  <li className="text-sm">4M Intel Smart Cache</li>
                 </ul>
+                <h4 className="font-medium mb-2">
+                  Rating: {product?.reviews[0].individualRating}
+                </h4>
               </div>
             </div>
             <div className="mr-3">

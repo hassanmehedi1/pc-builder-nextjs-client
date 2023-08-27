@@ -21,8 +21,8 @@ const PcBuilder = ({ pcbuild }) => {
           <p className="text-xl font-bold text-[#3749BB] font-mono  text-center">
             PC Master - Build & Configure Your Dream PC
           </p>
-          <p className="my-3 bg-gray-500 px-3 text-white rounded">
-            core components
+          <p className="my-3 bg-gray-500 px-3 text-white rounded text-center">
+            Core Components
           </p>
 
           <PcBuilderCategoryCard
@@ -40,7 +40,7 @@ const PcBuilder = ({ pcbuild }) => {
                     <div className="flex flex-wrap gap-4 items-center">
                       <div className="rounded">
                         <Image
-                          src="/pc.png"
+                          src="/cpu2.jpg"
                           width={70}
                           height={70}
                           alt="pc/img"
@@ -74,7 +74,7 @@ const PcBuilder = ({ pcbuild }) => {
                     <div className="flex flex-wrap gap-4 items-center">
                       <div className="rounded">
                         <Image
-                          src="/pc.png"
+                          src="/mother.png"
                           width={70}
                           height={70}
                           alt="pc/img"
@@ -108,7 +108,7 @@ const PcBuilder = ({ pcbuild }) => {
                     <div className="flex flex-wrap gap-4 items-center">
                       <div className="rounded">
                         <Image
-                          src="/pc.png"
+                          src="/ram.png"
                           width={70}
                           height={70}
                           alt="pc/img"
@@ -136,13 +136,13 @@ const PcBuilder = ({ pcbuild }) => {
           {filteredPCBuilds?.map(
             (data, index) =>
               // Check if the product category is 'CPU / Processor'
-              data?.product?.category === "Power Supply Unit" && (
+              data?.product?.category === "powerSupplyUnit" && (
                 <div key={index}>
                   <div className="w-[95%] my-3 bg-[#F2F4F8] mx-auto flex flex-wrap gap-5 justify-between items-center">
                     <div className="flex flex-wrap gap-4 items-center">
                       <div className="rounded">
                         <Image
-                          src="/pc.png"
+                          src="/power.png"
                           width={70}
                           height={70}
                           alt="pc/img"
@@ -176,7 +176,7 @@ const PcBuilder = ({ pcbuild }) => {
                     <div className="flex flex-wrap gap-4 items-center">
                       <div className="rounded">
                         <Image
-                          src="/pc.png"
+                          src="/hdd.png"
                           width={70}
                           height={70}
                           alt="pc/img"
@@ -210,7 +210,7 @@ const PcBuilder = ({ pcbuild }) => {
                     <div className="flex flex-wrap gap-4 items-center">
                       <div className="rounded">
                         <Image
-                          src="/pc.png"
+                          src="/pcc.png"
                           width={70}
                           height={70}
                           alt="pc/img"
@@ -244,7 +244,7 @@ const PcBuilder = ({ pcbuild }) => {
                     <div className="flex flex-wrap gap-4 items-center">
                       <div className="rounded">
                         <Image
-                          src="/pc.png"
+                          src="/sam.jpg"
                           width={70}
                           height={70}
                           alt="pc/img"
@@ -265,7 +265,8 @@ const PcBuilder = ({ pcbuild }) => {
         </div>
       </div>
       <div className="w-full md:w-4/5 h-full bg-white mx-auto flex justify-end pb-3 pr-8">
-        <button
+        <Link
+          href={isButtonDisabled ? "#" : "/congratulations"}
           disabled={isButtonDisabled}
           className={`px-8 py-3 rounded border hover:border-orange-500 ${
             isButtonDisabled
@@ -274,7 +275,7 @@ const PcBuilder = ({ pcbuild }) => {
           } font-medium`}
         >
           Build PC
-        </button>
+        </Link>
       </div>
     </div>
   );

@@ -271,7 +271,7 @@ const Components = ({ singleData, relatedProduct }) => {
                           </div>
                           <div>
                             <p className="text-left mt-2 text-gray-500">
-                              description
+                              {review.comment}
                             </p>
                           </div>
                         </div>

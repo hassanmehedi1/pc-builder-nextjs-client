@@ -15,7 +15,7 @@ export const authOptions = {
   ],
   // for privet route
   pages: {
-    signIn: "https://pc-builder-next-js-three.vercel.app/login",
+    signIn: "/login",
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
